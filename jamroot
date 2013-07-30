@@ -1,0 +1,10 @@
+import testing ;
+
+lib gtestlib : : <name>gtest ;
+
+lib commoncpplib : 
+src/main/hash/ImagePHash.cpp
+: <link>shared ;
+
+install lib : commoncpplib ;
+unit-test ImagePHashTest : src/test/hash/ImagePHashTest.cpp gtestlib ;
