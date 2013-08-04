@@ -1,34 +1,13 @@
+#include "../../include/hash/ImagePHash.hpp"
 #include <string>
 #include <cmath>
 #include <GraphicsMagick/Magick++.h>
 #include <GraphicsMagick/magick/image.h>
 #include <boost/multi_array.hpp>
 
+
 using namespace std;
 using namespace Magick;
-
-class ImagePHash {
-public:
-	typedef boost::multi_array<double, 2> dctMatrix;
-	typedef dctMatrix::index index;
-
-	ImagePHash();
-	ImagePHash(int, int);
-	long getLongHash(string);
-	dctMatrix createMatrix(void);
-private:
-	int size;
-	int smallerSize;
-	double *c; //TODO replace this with a vector
-
-	void initCoefficients();
-	long convertToLong(dctMatrix, double);
-	double calcDctAverage(dctMatrix);
-	dctMatrix applyDCT(dctMatrix);
-	void init();
-
-
-};
 
 	ImagePHash::ImagePHash() {
 		size = 32;
