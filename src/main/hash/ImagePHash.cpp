@@ -1,11 +1,11 @@
 #include <string>
 #include <cmath>
-#include <ImageMagick/Magick++.h>
-#include <ImageMagick/magick/image.h>
+#include <GraphicsMagick/Magick++.h>
+#include <GraphicsMagick/magick/image.h>
 #include <boost/multi_array.hpp>
 
+using namespace std;
 using namespace Magick;
-using namespace std::string;
 
 class ImagePHash {
 public:
@@ -14,12 +14,12 @@ public:
 
 	ImagePHash();
 	ImagePHash(int, int);
-	long getLongHash(std::string);
+	long getLongHash(string);
 	dctMatrix createMatrix(void);
 private:
 	int size;
 	int smallerSize;
-	double c[];
+	double *c; //TODO replace this with a vector
 
 	void initCoefficients();
 	long convertToLong(dctMatrix, double);
@@ -44,14 +44,15 @@ private:
 	}
 
 	void ImagePHash::init() {
+		InitializeMagick(NULL);
 		initCoefficients();
-
-
 	}
 
-	long ImagePHash::getLongHash(std::string filename) {
-		Image img = new Image(filename);
-		return 0;
+	long ImagePHash::getLongHash(string filename) {
+		Image img(filename);
+
+		int height = img.baseRows();
+		return height;
 	}
 
 	/**
