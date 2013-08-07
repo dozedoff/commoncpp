@@ -1,15 +1,15 @@
 project commoncpp
 	: requirements 
-    <include>/usr/include/GraphicsMagick/	
+    <include>/usr/include/GraphicsMagick/
 ;
 
 import testing ;
 
 lib gtestlib : : <name>gtest ;
-
+lib magick : : <name>GraphicsMagick++ ;
 lib commoncpplib : 
-src/main/hash/ImagePHash.cpp
+src/main/hash/ImagePHash.cpp magick
 : <link>shared ;
 
-install lib : commoncpplib ;
-unit-test ImagePHashTest : src/test/hash/ImagePHashTest.cpp gtestlib ;
+# install lib : commoncpplib ;
+unit-test ImagePHashTest : src/test/hash/ImagePHashTest.cpp gtestlib commoncpplib ;

@@ -28,10 +28,32 @@ using namespace Magick;
 	}
 
 	long ImagePHash::getLongHash(string filename) {
-		Image img(filename);
+		double avg;
+		long pHash;
 
-		int height = img.baseRows();
-		return height;
+		Image img(filename);
+		img.scale(Geometry(size, size));
+		img.type(GrayscaleType);
+		img.modifyImage();
+
+		Pixels view(img);
+		PixelPacket *pixels = view.get(0,0,size,size);
+
+		dctMatrix values(boost::extents[size][size]);
+
+		int x, y;
+
+		for (x = 0; x < size; x ++) {
+			for (y = 0; y < size; y++) {
+				values[x][y] = pixels->blue;
+			}
+		}
+
+		values = applyDCT(values);
+		avg = calcDctAverage(values);
+		pHash = convertToLong(values, avg);
+
+		return pHash;
 	}
 
 	/**

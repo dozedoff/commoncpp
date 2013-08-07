@@ -12,8 +12,10 @@
 
 using namespace Magick;
 
-TEST(ImagePHashTest, sizeTest) {
-	ASSERT_EQ(1600,1600);
+TEST(ImagePHashTest, hashImage) {
+	ImagePHash iph;
+	long pHash = iph.getLongHash("testImage.jpg");
+	ASSERT_EQ(1111,pHash);
 }
 
 int main(int argc, char **argv) {
