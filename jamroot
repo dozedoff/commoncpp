@@ -7,9 +7,11 @@ import testing ;
 
 lib gtestlib : : <name>gtest ;
 lib magick : : <name>GraphicsMagick++ ;
-lib commoncpplib : 
+lib boost-fs : : <name>boost_filesystem ;
+lib boost-sys : : <name>boost_system ;
+
+lib commoncpp : 
 src/main/hash/ImagePHash.cpp magick
 : <link>shared ;
 
-# install lib : commoncpplib ;
-unit-test ImagePHashTest : src/test/hash/ImagePHashTest.cpp gtestlib commoncpplib ;
+unit-test ImagePHashTest : src/test/hash/ImagePHashTest.cpp gtestlib commoncpp ;
