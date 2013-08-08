@@ -39,31 +39,37 @@ using namespace Magick;
 
 		Image img(filename);
 		LOG4CPLUS_INFO(logger, "Opening image " << filename);
-		img.scale(Geometry(size, size));
+		Geometry *geo = new Geometry(size, size);
+		geo->aspect(true);
+		img.scale(*geo);
 		LOG4CPLUS_INFO(logger, "Image dimension is: " << size);
 		img.type(GrayscaleType);
 		img.modifyImage();
 
 		Pixels view(img);
-		PixelPacket *pixels = view.get(0,0,size,size);
+		const PixelPacket *pixels = view.getConst(0,0,size,size);
 
-		dctMatrix values(boost::extents[size][size]);
+		if(pixels == NULL) {
+			return 0L;
+		}
+
+		dctMatrix values = createMatrix();
 
 		int x, y;
-		string debug = "";
+//		string debug = "";
 
 		for (x = 0; x < size; x ++) {
 			for (y = 0; y < size; y++) {
-				values[x][y] = pixels->blue;
-				std::ostringstream strs;
-				strs << pixels->blue;
-				std::string str = strs.str();
-
-				debug += str;
+				values[x][y] = pixels[x + y*size].blue;
+//				std::ostringstream strs;
+//				strs << pixels[x*size + y].blue << ",";
+//				std::string str = strs.str();
+//
+//				debug += str;
 			}
 
-			LOG4CPLUS_INFO(logger, "Column " << x << " is " << debug);
-			debug = "";
+//			LOG4CPLUS_INFO(logger, "Column " << x << " is " << debug);
+//			debug = "";
 		}
 
 		values = applyDCT(values);
@@ -261,7 +267,7 @@ using namespace Magick;
 	ImagePHash::dctMatrix ImagePHash::applyDCT(dctMatrix f) {
 		int N = size;
 
-		dctMatrix F(boost::extents[N][N]);
+		dctMatrix F = createMatrix();
 		for (int u = 0; u < N; u++) {
 			for (int v = 0; v < N; v++) {
 				double sum = 0.0;
@@ -276,6 +282,12 @@ using namespace Magick;
 			}
 		}
 		return F;
+	}
+
+	ImagePHash::dctMatrix ImagePHash::createMatrix() {
+		  boost::array<dctMatrix::index, 2> shape = {{size, size}};
+		  dctMatrix matrix(shape);
+		return matrix;
 	}
 
 
