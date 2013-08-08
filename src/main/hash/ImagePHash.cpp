@@ -4,8 +4,13 @@
 #include <GraphicsMagick/Magick++.h>
 #include <GraphicsMagick/magick/image.h>
 #include <boost/multi_array.hpp>
+#include <log4cplus/logger.h>
+#include <log4cplus/loggingmacros.h>
+#include <log4cplus/configurator.h>
+#include <iomanip>
+#include <ostream>
 
-
+using namespace log4cplus;
 using namespace std;
 using namespace Magick;
 
@@ -23,6 +28,7 @@ using namespace Magick;
 	}
 
 	void ImagePHash::init() {
+		logger = Logger::getInstance(LOG4CPLUS_TEXT("main"));
 		InitializeMagick(NULL);
 		initCoefficients();
 	}
@@ -32,7 +38,9 @@ using namespace Magick;
 		long pHash;
 
 		Image img(filename);
+		LOG4CPLUS_INFO(logger, "Opening image " << filename);
 		img.scale(Geometry(size, size));
+		LOG4CPLUS_INFO(logger, "Image dimension is: " << size);
 		img.type(GrayscaleType);
 		img.modifyImage();
 
@@ -42,15 +50,25 @@ using namespace Magick;
 		dctMatrix values(boost::extents[size][size]);
 
 		int x, y;
+		string debug = "";
 
 		for (x = 0; x < size; x ++) {
 			for (y = 0; y < size; y++) {
 				values[x][y] = pixels->blue;
+				std::ostringstream strs;
+				strs << pixels->blue;
+				std::string str = strs.str();
+
+				debug += str;
 			}
+
+			LOG4CPLUS_INFO(logger, "Column " << x << " is " << debug);
+			debug = "";
 		}
 
 		values = applyDCT(values);
 		avg = calcDctAverage(values);
+		LOG4CPLUS_INFO(logger, "DCT average is: " << avg);
 		pHash = convertToLong(values, avg);
 
 		return pHash;

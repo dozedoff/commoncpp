@@ -9,9 +9,10 @@ lib gtestlib : : <name>gtest ;
 lib magick : : <name>GraphicsMagick++ ;
 lib boost-fs : : <name>boost_filesystem ;
 lib boost-sys : : <name>boost_system ;
+lib log4cplus : : <name>log4cplus ;
 
 lib commoncpp : 
-src/main/hash/ImagePHash.cpp magick
+src/main/hash/ImagePHash.cpp magick log4cplus
 : <link>shared ;
 
-unit-test ImagePHashTest : src/test/hash/ImagePHashTest.cpp gtestlib commoncpp ;
+unit-test ImagePHashTest : src/test/hash/ImagePHashTest.cpp gtestlib commoncpp log4cplus ;
