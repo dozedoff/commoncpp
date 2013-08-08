@@ -16,7 +16,7 @@ using namespace Magick;
 TEST(ImagePHashTest, hashImage) {
 	ImagePHash iph;
 	long pHash = iph.getLongHash("src/test/hash/testImage.jpg");
-	ASSERT_EQ(1111,pHash);
+	ASSERT_EQ(7655956633439617023,pHash);
 }
 
 int main(int argc, char **argv) {
