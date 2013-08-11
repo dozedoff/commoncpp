@@ -190,6 +190,8 @@ using namespace Magick;
 	}*/
 
 	long ImagePHash::convertToLong(dctMatrix dctVals, double avg) {
+		long currentValue;
+
 		if (smallerSize > 9) {
 			throw "The selected smallerSize value is to big for the long datatype";
 		}
@@ -199,7 +201,13 @@ using namespace Magick;
 		for (int x = 0; x < smallerSize; x++) {
 			for (int y = 0; y < smallerSize; y++) {
 				if (x != 0 && y != 0) {
-					hash += (dctVals[x][y] > avg ? 1 : 0);
+					currentValue = dctVals[x][y];
+					hash += (currentValue > avg ? 1 : 0);
+					asm("rol %0;"
+							:"=r" (hash)
+							:"r" (hash)
+					);
+
 					//hash = Long.rotateLeft(hash, 1); //TODO rotate left in C++
 				}
 			}
