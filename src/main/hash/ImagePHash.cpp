@@ -9,6 +9,7 @@
 #include <log4cplus/configurator.h>
 #include <iomanip>
 #include <ostream>
+#include "../../include/util/Bit.hpp"
 
 using namespace log4cplus;
 using namespace std;
@@ -28,7 +29,7 @@ using namespace Magick;
 	}
 
 	void ImagePHash::init() {
-		logger = Logger::getInstance(LOG4CPLUS_TEXT("main"));
+		logger = Logger::getInstance(LOG4CPLUS_TEXT("ImagePHash"));
 		InitializeMagick(NULL);
 		initCoefficients();
 	}
@@ -196,19 +197,14 @@ using namespace Magick;
 			throw "The selected smallerSize value is to big for the long datatype";
 		}
 
-		long hash = 0;
+		long long hash = 0;
 
 		for (int x = 0; x < smallerSize; x++) {
 			for (int y = 0; y < smallerSize; y++) {
 				if (x != 0 && y != 0) {
 					currentValue = dctVals[x][y];
 					hash += (currentValue > avg ? 1 : 0);
-					asm("rol %0;"
-							:"=r" (hash)
-							:"r" (hash)
-					);
-
-					//hash = Long.rotateLeft(hash, 1); //TODO rotate left in C++
+					hash = Bit::rotateLeft(hash);
 				}
 			}
 		}
