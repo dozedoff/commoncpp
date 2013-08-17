@@ -39,11 +39,10 @@ using namespace Magick;
 		long pHash;
 
 		Image img(filename);
-		LOG4CPLUS_INFO(logger, "Opening image " << filename);
+		LOG4CPLUS_DEBUG(logger, "Opening image " << filename);
 		Geometry *geo = new Geometry(size, size);
 		geo->aspect(true);
 		img.scale(*geo);
-		LOG4CPLUS_INFO(logger, "Image dimension is: " << size);
 		img.type(GrayscaleType);
 		img.modifyImage();
 
@@ -57,25 +56,15 @@ using namespace Magick;
 		dctMatrix values = createMatrix();
 
 		int x, y;
-//		string debug = "";
 
 		for (x = 0; x < size; x ++) {
 			for (y = 0; y < size; y++) {
 				values[x][y] = pixels[x + y*size].blue;
-//				std::ostringstream strs;
-//				strs << pixels[x*size + y].blue << ",";
-//				std::string str = strs.str();
-//
-//				debug += str;
 			}
-
-//			LOG4CPLUS_INFO(logger, "Column " << x << " is " << debug);
-//			debug = "";
 		}
 
 		values = applyDCT(values);
 		avg = calcDctAverage(values);
-		LOG4CPLUS_INFO(logger, "DCT average is: " << avg);
 		pHash = convertToLong(values, avg);
 
 		return pHash;
