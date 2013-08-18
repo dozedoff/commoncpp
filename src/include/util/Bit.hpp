@@ -8,10 +8,12 @@
 #ifndef BIT_HPP_
 #define BIT_HPP_
 
+#include <inttypes.h>
+
 class Bit {
 public:
-	static long long rotateLeft(const long long);
-	static unsigned long long rotateLeft(const unsigned long long);
+	static int64_t rotateLeft(const int64_t);
+	static uint64_t rotateLeft(const uint64_t);
 };
 
 #endif /* BIT_HPP_ */

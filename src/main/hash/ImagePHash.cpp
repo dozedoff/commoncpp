@@ -179,14 +179,14 @@ using namespace Magick;
 		return hash;
 	}*/
 
-	long ImagePHash::convertToLong(dctMatrix dctVals, double avg) {
-		long currentValue;
+	int64_t ImagePHash::convertToLong(dctMatrix dctVals, double avg) {
+		double currentValue;
 
 		if (smallerSize > 9) {
 			throw "The selected smallerSize value is to big for the long datatype";
 		}
 
-		long long hash = 0;
+		int64_t hash = 0;
 
 		for (int x = 0; x < smallerSize; x++) {
 			for (int y = 0; y < smallerSize; y++) {

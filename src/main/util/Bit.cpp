@@ -7,12 +7,12 @@
 
 #include "../../include/util/Bit.hpp"
 
-long long Bit::rotateLeft(const long long value) {
-	unsigned long long unsig = value;
+int64_t Bit::rotateLeft(const int64_t value) {
+	uint64_t unsig = value;
 	return Bit::rotateLeft(unsig);
 }
 
-unsigned long long Bit::rotateLeft(const unsigned long long value) {
+uint64_t Bit::rotateLeft(const uint64_t value) {
 	return (value << 1) | (value >> (sizeof(value)*8 - 1));
 }
 
