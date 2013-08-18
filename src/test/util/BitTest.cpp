@@ -8,7 +8,7 @@
 #include <limits>
 #include "../../include/util/Bit.hpp"
 
-TEST(BitTest, ZeroRotate) {
+TEST(BitTest, ZeroRotateSigned) {
 	int64_t testValue = 0;
 	int64_t result = -1;
 
@@ -17,7 +17,7 @@ TEST(BitTest, ZeroRotate) {
 	ASSERT_EQ(0, result);
 }
 
-TEST(BitTest, OneRotate) {
+TEST(BitTest, OneRotateSigned) {
 	int64_t testValue = 1;
 	int64_t result = -1;
 
@@ -26,7 +26,7 @@ TEST(BitTest, OneRotate) {
 	ASSERT_EQ(2, result);
 }
 
-TEST(BitTest, DoubleRotate) {
+TEST(BitTest, DoubleRotateSigned) {
 	int64_t testValue = 1;
 	int64_t result = -5;
 
@@ -36,7 +36,7 @@ TEST(BitTest, DoubleRotate) {
 	ASSERT_EQ(4, result);
 }
 
-TEST(BitTest, MinusOneRotate) {
+TEST(BitTest, MinusOneRotateSigned) {
 	int64_t testValue = -1;
 	int64_t result = 0;
 
@@ -45,7 +45,16 @@ TEST(BitTest, MinusOneRotate) {
 	ASSERT_EQ(-1, result);
 }
 
-TEST(BitTest, MaxNegativeRotate) {
+TEST(BitTest, MinusTwoRotateSigned) {
+	int64_t testValue = -2;
+	int64_t result = 0;
+
+	result = Bit::rotateLeft(testValue);
+
+	ASSERT_EQ(-3, result);
+}
+
+TEST(BitTest, MaxNegativeRotateSigned) {
 	int64_t testValue = std::numeric_limits<int64_t>::min();
 	int64_t result = -2;
 
@@ -54,7 +63,7 @@ TEST(BitTest, MaxNegativeRotate) {
 	ASSERT_EQ(1, result);
 }
 
-TEST(BitTest, Rotate31) {
+TEST(BitTest, Rotate31Signed) {
 	int64_t testValue = 1;
 	int64_t result = -2;
 	int i = 0;
@@ -68,7 +77,7 @@ TEST(BitTest, Rotate31) {
 	ASSERT_EQ(2147483648, result);
 }
 
-TEST(BitTest, Rotate32) {
+TEST(BitTest, Rotate32Signed) {
 	int64_t testValue = 1;
 	int64_t result = -2;
 	int i = 0;
@@ -85,7 +94,7 @@ TEST(BitTest, Rotate32) {
 TEST(BitTest, Rotate63Signed) {
 	int64_t testValue = 1;
 	int64_t result = -2;
-	int64_t expected = -9223372036854775808;
+	int64_t expected = std::numeric_limits<int64_t>::min();
 
 	int i = 0;
 
@@ -98,7 +107,7 @@ TEST(BitTest, Rotate63Signed) {
 	ASSERT_EQ(expected, result);
 }
 
-TEST(BitTest, Rotate64) {
+TEST(BitTest, Rotate64Signed) {
 	int64_t testValue = 1;
 	int64_t result = -2;
 	int i = 0;
@@ -112,14 +121,39 @@ TEST(BitTest, Rotate64) {
 	ASSERT_EQ(1, result);
 }
 
+TEST(BitTest, RotateUnsigned) {
+	uint64_t testValue = 1;
+	uint64_t result = -2;
+	int i = 0;
+
+	result = testValue;
+	result = Bit::rotateLeft(result);
+
+	ASSERT_EQ(2, result);
+}
+
 TEST(BitTest, Rotate63Unsigned) {
+	uint64_t testValue = 1;
+	uint64_t result = -2;
+	uint64_t expected = 9223372036854775808;
+	int i = 0;
+
+	result = testValue;
+
+	for(i = 0; i < 63; i++) {
+		result = Bit::rotateLeft(result);
+	}
+	ASSERT_EQ(expected, result);
+}
+
+TEST(BitTest, Rotate64Unsigned) {
 	uint64_t testValue = 1;
 	uint64_t result = -2;
 	int i = 0;
 
 	result = testValue;
 
-	for(i = 0; i < 63; i++) {
+	for(i = 0; i < 64; i++) {
 		result = Bit::rotateLeft(result);
 	}
 

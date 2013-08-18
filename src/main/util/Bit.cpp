@@ -9,7 +9,7 @@
 
 int64_t Bit::rotateLeft(const int64_t value) {
 	uint64_t unsig = value;
-	return Bit::rotateLeft(unsig);
+	return (int64_t)Bit::rotateLeft(unsig);
 }
 
 uint64_t Bit::rotateLeft(const uint64_t value) {
