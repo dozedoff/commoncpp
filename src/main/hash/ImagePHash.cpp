@@ -28,6 +28,10 @@ using namespace Magick;
 		init();
 	}
 
+	ImagePHash::~ImagePHash(){
+		delete c;
+	}
+
 	void ImagePHash::init() {
 		logger = Logger::getInstance(LOG4CPLUS_TEXT("ImagePHash"));
 		InitializeMagick(NULL);
@@ -66,6 +70,7 @@ using namespace Magick;
 		values = applyDCT(values);
 		avg = calcDctAverage(values);
 		pHash = convertToLong(values, avg);
+		delete geo;
 
 		return pHash;
 	}

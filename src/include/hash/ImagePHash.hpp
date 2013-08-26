@@ -25,6 +25,8 @@ public:
 
 	ImagePHash();
 	ImagePHash(int, int);
+	~ImagePHash();
+
 	long getLongHash(string);
 	dctMatrix createMatrix(void);
 private:
