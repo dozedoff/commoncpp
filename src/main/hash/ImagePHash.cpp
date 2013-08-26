@@ -44,9 +44,9 @@ using namespace Magick;
 
 		Image img(filename);
 		LOG4CPLUS_DEBUG(logger, "Opening image " << filename);
-		Geometry *geo = new Geometry(size, size);
-		geo->aspect(true);
-		img.scale(*geo);
+		Geometry geo(size, size);
+		geo.aspect(true);
+		img.scale(geo);
 		img.type(GrayscaleType);
 		img.modifyImage();
 
@@ -70,7 +70,6 @@ using namespace Magick;
 		values = applyDCT(values);
 		avg = calcDctAverage(values);
 		pHash = convertToLong(values, avg);
-		delete geo;
 
 		return pHash;
 	}
