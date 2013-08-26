@@ -29,7 +29,7 @@ using namespace Magick;
 	}
 
 	ImagePHash::~ImagePHash(){
-		delete c;
+		delete [] c;
 	}
 
 	void ImagePHash::init() {
