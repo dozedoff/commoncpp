@@ -11,10 +11,7 @@ lib boost-fs : : <name>boost_filesystem ;
 lib boost-sys : : <name>boost_system ;
 lib log4cplus : : <name>log4cplus ;
 
-lib commoncpp : 
-src/main/hash/ImagePHash.cpp src/main/util/Bit.cpp magick log4cplus
-: <link>shared ;
+lib commoncpp : [ GLOB src/main/hash src/main/util : *.cpp  ] magick log4cplus : <link>shared ;
 
-unit-test ImagePHashTest : src/test/hash/ImagePHashTest.cpp src/test/util/BitTest.cpp gtestlib commoncpp log4cplus ;
+unit-test ImagePHashTest : [ GLOB src/test/hash src/test/util : *.cpp  ] gtestlib commoncpp log4cplus ;
 
-# TODO: Use GLOB to select files
