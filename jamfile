@@ -11,7 +11,16 @@ lib boost-fs : : <name>boost_filesystem ;
 lib boost-sys : : <name>boost_system ;
 lib log4cplus : : <name>log4cplus ;
 
-lib commoncpp : [ GLOB src/main/hash src/main/util : *.cpp  ] magick log4cplus : <link>shared ;
+source = 
+[ MATCH (.*main.*) : [ glob-tree *.cpp ] ]
+;
 
-unit-test ImagePHashTest : [ GLOB src/test/hash src/test/util : *.cpp  ] gtestlib commoncpp log4cplus ;
+tests = 
+[ MATCH (.*test.*) : [ glob-tree *.cpp ] ]
+;
+
+lib commoncpp : $(source) magick log4cplus : <link>shared ;
+
+
+unit-test test : $(tests) gtestlib commoncpp log4cplus ;
 
