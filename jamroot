@@ -4,7 +4,6 @@ project commoncpp
 ;
 
 import testing ;
-explicit tests ;
 
 lib gtestlib : : <name>gtest ;
 lib magick : : <name>GraphicsMagick++ ;
@@ -21,7 +20,5 @@ tests =
 ;
 
 lib commoncpp : $(source) magick log4cplus : <link>shared ;
-
-
 unit-test tests : $(tests) gtestlib commoncpp log4cplus ;
 
