@@ -10,6 +10,9 @@ lib magick : : <name>GraphicsMagick++ ;
 lib boost-fs : : <name>boost_filesystem ;
 lib boost-sys : : <name>boost_system ;
 lib log4cplus : : <name>log4cplus ;
+lib openssl : : <name>ssl ;
+
+alias libs : magick boost-fs boost-sys log4cplus openssl ;
 
 source = 
 [ MATCH (.*main.*) : [ glob-tree *.cpp ] ]
@@ -19,6 +22,6 @@ tests =
 [ MATCH (.*test.*) : [ glob-tree *.cpp ] ]
 ;
 
-lib commoncpp : $(source) magick log4cplus : <link>shared ;
-unit-test tests : $(tests) gtestlib commoncpp log4cplus ;
+lib commoncpp : $(source) libs : <link>shared ;
+unit-test tests : $(tests) gtestlib commoncpp libs ;
 
