@@ -14,6 +14,7 @@
 #define SHA_HPP_
 
 #include <boost/filesystem.hpp>
+//#include <boost/system/error_code.hpp>
 #include <log4cplus/logger.h>
 #include <log4cplus/loggingmacros.h>
 #include <log4cplus/configurator.h>

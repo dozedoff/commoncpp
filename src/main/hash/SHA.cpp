@@ -14,6 +14,7 @@
 #include <openssl/sha.h>
 #include <boost/iostreams/device/file.hpp>
 #include <boost/filesystem/fstream.hpp>
+#include <iomanip>
 
 using namespace log4cplus;
 
@@ -28,25 +29,41 @@ std::string SHA::sha256(boost::filesystem::path filepath) {
 	}
 
 	unsigned char digest[SHA256_DIGEST_LENGTH];
-	char * fileBuffer;
-	fileBuffer = new char[FILE_BUFFER_SIZE];
-
 	boost::filesystem::ifstream targetFile;
 
-	targetFile.open(filepath, std::ios::out | std::ios::app | std::ios::binary);
+	targetFile.open(filepath, std::ios::in | std::ios::app | std::ios::binary);
 
 	SHA256_CTX sha256;
 	SHA256_Init(&sha256);
 
-	while (!targetFile.eof()) {
-		unsigned int read = targetFile.readsome(fileBuffer, FILE_BUFFER_SIZE);
-		SHA256_Update(&sha256, fileBuffer, read);
+	std::istream_iterator<char> eos;
+	std::istream_iterator<char> ite(targetFile);
+
+	int readCount = 0;
+
+	while (ite != eos) {
+		SHA256_Update(&sha256, &(*ite), 1);
+		ite++;
+		readCount++;
+		if(targetFile.bad()) {
+			LOG4CPLUS_ERROR(logger, "Error while reading file " << filepath);
+			break;
+		}
 	}
 
 	SHA256_Final(digest, &sha256);
 	targetFile.close();
 
-	return std::string(*digest,SHA256_DIGEST_LENGTH);
+	LOG4CPLUS_DEBUG(logger, "Read " << readCount << " bytes from " << filepath);
+
+	std::ostringstream os;
+	    os << std::hex << std::setfill('0');  // set the stream to hex with 0 fill
+
+	    for(int i = 0; i < SHA256_DIGEST_LENGTH; i++) {
+	    	os << std::setw(2) << int(digest[i]);
+	    }
+
+	return os.str();
 }
 
 SHA::~SHA() {
