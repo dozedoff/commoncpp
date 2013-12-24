@@ -36,13 +36,14 @@ std::string SHA::sha256(boost::filesystem::path filepath) {
 	SHA256_CTX sha256;
 	SHA256_Init(&sha256);
 
-	std::istream_iterator<unsigned char> eos;
-	std::istream_iterator<unsigned char> ite(targetFile);
+	std::istreambuf_iterator<char> eos;
+	std::istreambuf_iterator<char> ite(targetFile);
 
 	int readCount = 0;
 
 	while (ite != eos) {
-		SHA256_Update(&sha256, &(*ite), sizeof(*ite));
+		char byte = *ite;
+		SHA256_Update(&sha256, &byte, sizeof(*ite));
 
 		ite++;
 		readCount++;
