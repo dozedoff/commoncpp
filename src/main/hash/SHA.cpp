@@ -36,19 +36,16 @@ std::string SHA::sha256(boost::filesystem::path filepath) {
 	SHA256_CTX sha256;
 	SHA256_Init(&sha256);
 
-	std::istream_iterator<char> eos;
-	std::istream_iterator<char> ite(targetFile);
+	std::istream_iterator<unsigned char> eos;
+	std::istream_iterator<unsigned char> ite(targetFile);
 
 	int readCount = 0;
 
 	while (ite != eos) {
-		SHA256_Update(&sha256, &(*ite), 1);
+		SHA256_Update(&sha256, &(*ite), sizeof(*ite));
+
 		ite++;
 		readCount++;
-		if(targetFile.bad()) {
-			LOG4CPLUS_ERROR(logger, "Error while reading file " << filepath);
-			break;
-		}
 	}
 
 	SHA256_Final(digest, &sha256);
@@ -60,7 +57,7 @@ std::string SHA::sha256(boost::filesystem::path filepath) {
 	    os << std::hex << std::setfill('0');  // set the stream to hex with 0 fill
 
 	    for(int i = 0; i < SHA256_DIGEST_LENGTH; i++) {
-	    	os << std::setw(2) << int(digest[i]);
+	    	os << std::setw(2) << (unsigned int)(digest[i]);
 	    }
 
 	return os.str();
