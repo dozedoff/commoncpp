@@ -124,7 +124,6 @@ TEST(BitTest, Rotate64Signed) {
 TEST(BitTest, RotateUnsigned) {
 	uint64_t testValue = 1;
 	uint64_t result = -2;
-	int i = 0;
 
 	result = testValue;
 	result = Bit::rotateLeft(result);
@@ -135,7 +134,7 @@ TEST(BitTest, RotateUnsigned) {
 TEST(BitTest, Rotate63Unsigned) {
 	uint64_t testValue = 1;
 	uint64_t result = -2;
-	uint64_t expected = 9223372036854775808;
+	uint64_t expected = 9223372036854775808ul;
 	int i = 0;
 
 	result = testValue;
