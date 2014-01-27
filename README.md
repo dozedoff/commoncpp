@@ -15,3 +15,6 @@ Common C++ classes used in other projects.
 ```
 yum install boost-build.noarch boost-devel.x86_64 log4cplus-devel.x86_64 openssl-devel.x86_64 GraphicsMagick-c++-devel.x86_64 gtest-devel.x86_64
 ```
+
+### Build
+Run ```bjam``` in the project root directory to build and run the tests.
