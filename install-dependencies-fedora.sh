@@ -1,1 +1,1 @@
-sudo yum install boost-build.noarch boost-devel.x86_64 log4cplus-devel.x86_64 openssl-devel.x86_64 GraphicsMagick-c++-devel.x86_64 gtest-devel.x86_64
+sudo yum install gcc-c++.x86_64 boost-build.noarch boost-devel.x86_64 log4cplus-devel.x86_64 openssl-devel.x86_64 GraphicsMagick-c++-devel.x86_64 gtest-devel.x86_64
