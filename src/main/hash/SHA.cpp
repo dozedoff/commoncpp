@@ -1,5 +1,5 @@
 /* The MIT License (MIT)
- * Copyright (c) <2013> <Nicholas Wright>
+ * Copyright (c) 2014 Nicholas Wright
  * http://opensource.org/licenses/MIT
  */
 

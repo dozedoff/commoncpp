@@ -1,9 +1,15 @@
+/* The MIT License (MIT)
+ * Copyright (c) 2014 Nicholas Wright
+ * http://opensource.org/licenses/MIT
+ */
+
 /*
  * BitTest.cpp
  *
  *  Created on: 10 Aug 2013
  *      Author: nicholas
  */
+
 #include <gtest/gtest.h>
 #include <limits>
 #include "../../include/util/Bit.hpp"
