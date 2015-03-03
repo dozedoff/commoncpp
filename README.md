@@ -11,12 +11,12 @@ Common C++ classes used in other projects.
 * GraphicsMagic C++
 * Gtest
 
-##### Fedora 20:
+##### Fedora 21:
 ```
 yum install boost-build.noarch boost-devel.x86_64 log4cplus-devel.x86_64 openssl-devel.x86_64 GraphicsMagick-c++-devel.x86_64 gtest-devel.x86_64
 ```
 
-##### Ubuntu 13.10:
+##### Ubuntu 14.10:
 ```
 sudo apt-get install libboost-all-dev liblog4cplus-dev libgraphicsmagick++1-dev libssl-dev libgtest-dev
 ```
