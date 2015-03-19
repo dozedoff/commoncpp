@@ -6,8 +6,6 @@
 #include "../../include/hash/ImagePHash.hpp"
 #include <string>
 #include <cmath>
-#include <GraphicsMagick/Magick++.h>
-#include <GraphicsMagick/magick/image.h>
 #include <boost/multi_array.hpp>
 #include <log4cplus/logger.h>
 #include <log4cplus/loggingmacros.h>
@@ -44,11 +42,19 @@ using namespace Magick;
 	}
 
 	long ImagePHash::getLongHash(string filename) {
+		LOG4CPLUS_DEBUG(logger, "Opening image " << filename);
+		Image img(filename);
+		Blob blob;
+		img.write(&blob);
+
+		return getLongHash(blob);
+	}
+
+	long ImagePHash::getLongHash(Magick::Blob image_data) {
 		double avg;
 		long pHash;
 
-		Image img(filename);
-		LOG4CPLUS_DEBUG(logger, "Opening image " << filename);
+		Image img(image_data);
 		Geometry geo(size, size);
 		geo.aspect(true);
 		img.scale(geo);
@@ -290,6 +296,5 @@ using namespace Magick;
 		  boost::array<dctMatrix::index, 2> shape = {{size, size}};
 		  dctMatrix matrix(shape);
 		return matrix;
-	}
-
+}
 

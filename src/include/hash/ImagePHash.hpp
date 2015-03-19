@@ -19,6 +19,8 @@
 #include <log4cplus/loggingmacros.h>
 #include <log4cplus/configurator.h>
 #include <iomanip>
+#include <GraphicsMagick/Magick++.h>
+#include <GraphicsMagick/magick/image.h>
 
 using namespace log4cplus;
 using namespace std;
@@ -33,6 +35,7 @@ public:
 	~ImagePHash();
 
 	long getLongHash(string);
+	long getLongHash(Magick::Blob image_data);
 	dctMatrix createMatrix(void);
 private:
 	int size;
