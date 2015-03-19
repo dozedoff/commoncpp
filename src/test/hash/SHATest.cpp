@@ -17,7 +17,7 @@
 TEST(SHATest, sha256Binary_Image) {
 	SHA sha;
 	std::string hash = sha.sha256(boost::filesystem::path("src/test/hash/testImage.jpg"));
-	ASSERT_EQ("1acd0ad088779e7089ff2b5a7e7d23ab0d164ca66fa84d4d400c8eb8e6a9db66",hash);
+	ASSERT_EQ("3100fc5145acab142a5935b6b9436e53cde05e7382f36dc1e67360b9ff96539b",hash);
 }
 
 TEST(SHATest, sha256Text_empty) {
