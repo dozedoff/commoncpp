@@ -24,6 +24,12 @@ TEST(ImagePHashTest, hashImage) {
 	ASSERT_EQ(4092185452341198848,pHash);
 }
 
+TEST(ImagePHashTest, hashImage_resized) {
+	ImagePHash iph(32,9);
+	long pHash = iph.getLongHash("src/test/hash/testImage_small.jpg");
+	ASSERT_EQ(4092185452341198848,pHash);
+}
+
 int main(int argc, char **argv) {
 	 BasicConfigurator config;
 	 config.configure();
