@@ -18,10 +18,16 @@ find_library(crypto crypto)
 find_package(Boost 1.36.0 COMPONENTS filesystem system REQUIRED)
 include_directories(${Boost_INCLUDE_DIRS})
 
-add_executable (Test ${tests})
+# Add GTest library
+find_package(GTest)
 
 target_link_libraries(commoncpp ${GMagick} ${log4cplus} ${crypto} ${Boost_LIBRARIES})
-target_link_libraries(Test commoncpp ${gtest})
 
-enable_testing()
-add_test(NAME Test COMMAND Test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+# Only build tests if GTest is installed
+if(GTEST_FOUND)
+	add_executable (Test ${tests})
+	target_link_libraries(Test commoncpp ${GTEST_LIBRARIES})
+
+	enable_testing()
+	add_test(NAME Test COMMAND Test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+endif()
