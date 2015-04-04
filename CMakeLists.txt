@@ -30,4 +30,5 @@ if(GTEST_FOUND)
 
 	enable_testing()
 	add_test(NAME Test COMMAND Test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+	add_custom_command(TARGET Test POST_BUILD COMMAND ctest -V)
 endif()
