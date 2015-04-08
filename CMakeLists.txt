@@ -17,7 +17,7 @@ find_library(log4cplus log4cplus)
 find_library(crypto crypto)
 
 # Add required boost libraries
-find_package(Boost 1.36.0 COMPONENTS filesystem system REQUIRED)
+find_package(Boost 1.55.0 COMPONENTS filesystem system REQUIRED)
 include_directories(${Boost_INCLUDE_DIRS})
 
 # Add GTest library
