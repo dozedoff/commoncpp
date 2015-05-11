@@ -1,6 +1,12 @@
 cmake_minimum_required(VERSION 2.8)
 project(commoncpp)
 
+# Add additional cmake modules
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
+
+# Use code coverage
+INCLUDE(CodeCoverage)
+
 option (BUILD_TESTS "Build and run unit tests" ON)
 
 file(GLOB_RECURSE source src/main/*.cpp)
@@ -30,6 +36,9 @@ if(GTEST_FOUND AND BUILD_TESTS)
 	add_executable (Test ${tests})
 	target_link_libraries(Test commoncpp ${GTEST_LIBRARIES})
 
+	# copy test files to build directory
+	file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/src/test DESTINATION ${CMAKE_BINARY_DIR}/src)
+
 	enable_testing()
 	add_test(NAME Test COMMAND Test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 	add_custom_command(TARGET Test POST_BUILD COMMAND ctest -V)
@@ -38,3 +47,10 @@ elseif(GTEST_FOUND)
 else()
 	message(WARNING "GTest library not found, skipping tests.")
 endif()
+
+# Coverage target
+SETUP_TARGET_FOR_COVERAGE(
+	cov  		# Name for custom target.
+	Test         	# Name of the test driver executable that runs the tests.
+	coverage        # Name of output directory.
+)
