@@ -3,7 +3,7 @@
  * http://opensource.org/licenses/MIT
  */
 
-#include "../../include/hash/ImagePHash.hpp"
+#include "hash/ImagePHash.hpp"
 #include <string>
 #include <cmath>
 #include <boost/multi_array.hpp>
@@ -12,7 +12,7 @@
 #include <log4cplus/configurator.h>
 #include <iomanip>
 #include <ostream>
-#include "../../include/util/Bit.hpp"
+#include "util/Bit.hpp"
 
 using namespace log4cplus;
 using namespace std;

@@ -12,7 +12,7 @@
 
 #include <gtest/gtest.h>
 #include <limits>
-#include "../../include/util/Bit.hpp"
+#include "util/Bit.hpp"
 
 TEST(BitTest, ZeroRotateSigned) {
 	int64_t testValue = 0;

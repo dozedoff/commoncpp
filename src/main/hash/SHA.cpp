@@ -10,7 +10,7 @@
  *      Author: Nicholas Wright
  */
 
-#include "../../include/hash/SHA.hpp"
+#include "hash/SHA.hpp"
 #include <openssl/sha.h>
 #include <boost/iostreams/device/file.hpp>
 #include <boost/filesystem/fstream.hpp>
