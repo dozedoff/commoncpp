@@ -7,7 +7,6 @@
 #include <string>
 #include <cmath>
 #include <boost/multi_array.hpp>
-#include <log4cplus/logger.h>
 #include <log4cplus/loggingmacros.h>
 #include <iomanip>
 #include <ostream>
