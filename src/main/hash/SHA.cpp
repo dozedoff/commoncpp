@@ -14,6 +14,7 @@
 #include <openssl/sha.h>
 #include <boost/iostreams/device/file.hpp>
 #include <boost/filesystem/fstream.hpp>
+#include <log4cplus/loggingmacros.h>
 #include <iomanip>
 
 using namespace log4cplus;
