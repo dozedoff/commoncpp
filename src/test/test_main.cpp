@@ -8,9 +8,9 @@
  *
  * @date 3 Jul 2015
  * @author Nicholas Wright
- * @brief an undocumented file
+ * @brief Google test runner
  * 
- * Some more details about this file.
+ * This file runs all the tests.
  */
 
 #include <gtest/gtest.h>
