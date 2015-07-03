@@ -16,9 +16,7 @@
 #include <boost/multi_array.hpp>
 #include <string>
 #include <log4cplus/logger.h>
-#include <log4cplus/loggingmacros.h>
 #include <log4cplus/configurator.h>
-#include <iomanip>
 #include <GraphicsMagick/Magick++.h>
 #include <GraphicsMagick/magick/image.h>
 

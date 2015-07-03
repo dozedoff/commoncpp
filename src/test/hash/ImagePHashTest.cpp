@@ -12,7 +12,7 @@
 
 #include <gtest/gtest.h>
 #include <iostream>
-#include "../../include/hash/ImagePHash.hpp"
+#include "hash/ImagePHash.hpp"
 #include <GraphicsMagick/Magick++.h>
 
 

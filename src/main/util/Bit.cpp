@@ -10,7 +10,7 @@
  *      Author: nicholas
  */
 
-#include "../../include/util/Bit.hpp"
+#include "util/Bit.hpp"
 
 int64_t Bit::rotateLeft(const int64_t value) {
 	uint64_t unsig = value;

@@ -12,7 +12,7 @@
 
 #include <gtest/gtest.h>
 #include <iostream>
-#include "../../include/hash/SHA.hpp"
+#include "hash/SHA.hpp"
 
 TEST(SHATest, sha256Binary_Image) {
 	SHA sha;
