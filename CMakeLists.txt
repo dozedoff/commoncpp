@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
-project(commoncpp)
+project(commoncpp CXX)
+
+add_definitions(-std=c++11)
 
 # Add additional cmake modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
