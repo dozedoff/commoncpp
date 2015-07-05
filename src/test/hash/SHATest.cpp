@@ -43,3 +43,9 @@ TEST(SHATest, sha256Text_a_1m) {
 	std::string hash = sha.sha256(boost::filesystem::path("src/test/hash/a_1m.dat"));
 	ASSERT_EQ("cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0",hash);
 }
+
+TEST(SHATest, sha256_file_not_found) {
+	SHA sha;
+	std::string hash = sha.sha256(boost::filesystem::path("src/test/hash/notfound"));
+	ASSERT_EQ("",hash);
+}

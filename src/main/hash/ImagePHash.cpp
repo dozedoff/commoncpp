@@ -61,10 +61,6 @@ using namespace Magick;
 		Pixels view(img);
 		const PixelPacket *pixels = view.getConst(0,0,size,size);
 
-		if(pixels == NULL) {
-			return 0L;
-		}
-
 		dctMatrix values = createMatrix();
 
 		int x, y;
@@ -195,7 +191,7 @@ using namespace Magick;
 		double currentValue;
 
 		if (smallerSize > 9) {
-			throw "The selected smallerSize value is to big for the long datatype";
+			throw std::invalid_argument("The selected smallerSize value is to big for the long datatype");
 		}
 
 		int64_t hash = 0;

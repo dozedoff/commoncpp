@@ -21,7 +21,6 @@
 class SHA {
 public:
 	std::string sha256(boost::filesystem::path filepath);
-	virtual ~SHA();
 
 private:
 	static const int FILE_BUFFER_SIZE = 2048;
