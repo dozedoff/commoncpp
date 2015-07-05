@@ -3,6 +3,13 @@ project(commoncpp CXX)
 
 add_definitions(-std=c++11)
 
+# Boost needs additional flags
+if(BUILD_SHARED_LIBS)
+	ADD_DEFINITIONS(-DBOOST_LOG_DYN_LINK)
+else()
+	SET(Boost_USE_STATIC_LIBS ON)
+endif()
+
 # Add additional cmake modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
@@ -25,7 +32,7 @@ find_library(log4cplus log4cplus)
 find_library(crypto crypto)
 
 # Add required boost libraries
-find_package(Boost 1.55.0 COMPONENTS filesystem system REQUIRED)
+find_package(Boost 1.55.0 COMPONENTS log log_setup filesystem system REQUIRED)
 include_directories(${Boost_INCLUDE_DIRS})
 
 # Add GTest library
