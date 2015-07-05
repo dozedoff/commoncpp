@@ -14,18 +14,14 @@
 #include <openssl/sha.h>
 #include <boost/iostreams/device/file.hpp>
 #include <boost/filesystem/fstream.hpp>
-#include <log4cplus/loggingmacros.h>
+#include <sstream>
 #include <iomanip>
 
-using namespace log4cplus;
-
-SHA::SHA() {
-	logger = Logger::getInstance(LOG4CPLUS_TEXT("SHA"));
-}
+using namespace boost::log::trivial;
 
 std::string SHA::sha256(boost::filesystem::path filepath) {
 	if (!boost::filesystem::exists(filepath)) {
-		LOG4CPLUS_ERROR(logger, "File " << filepath << " does not exist");
+		BOOST_LOG_SEV(logger,error) << "File " << filepath << " does not exist";
 		return "";
 	}
 
@@ -53,7 +49,7 @@ std::string SHA::sha256(boost::filesystem::path filepath) {
 	SHA256_Final(digest, &sha256);
 	targetFile.close();
 
-	LOG4CPLUS_DEBUG(logger, "Read " << readCount << " bytes from " << filepath);
+	BOOST_LOG_SEV(logger,debug) << "Read " << readCount << " bytes from " << filepath;
 
 	std::ostringstream os;
 	    os << std::hex << std::setfill('0');  // set the stream to hex with 0 fill

@@ -14,18 +14,19 @@
 #define SHA_HPP_
 
 #include <boost/filesystem.hpp>
-#include <log4cplus/logger.h>
+
+#include <boost/log/trivial.hpp>
+#include <boost/log/sources/severity_logger.hpp>
 
 class SHA {
 public:
 	std::string sha256(boost::filesystem::path filepath);
-	SHA();
 	virtual ~SHA();
 
 private:
 	static const int FILE_BUFFER_SIZE = 2048;
 
-	log4cplus::Logger logger;
+	boost::log::sources::severity_logger< boost::log::trivial::severity_level> logger;
 };
 
 #endif /* SHA_HPP_ */

@@ -28,7 +28,6 @@ add_library(commoncpp ${source})
 
 find_library(GMagick GraphicsMagick++)
 find_library(gtest gtest)
-find_library(log4cplus log4cplus)
 find_library(crypto crypto)
 
 # Add required boost libraries
@@ -38,7 +37,7 @@ include_directories(${Boost_INCLUDE_DIRS})
 # Add GTest library
 find_package(GTest)
 
-target_link_libraries(commoncpp ${GMagick} ${log4cplus} ${crypto} ${Boost_LIBRARIES})
+target_link_libraries(commoncpp ${GMagick} ${crypto} ${Boost_LIBRARIES})
 
 # Only build tests if GTest is installed and option is selected
 if(GTEST_FOUND AND BUILD_TESTS)

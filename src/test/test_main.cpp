@@ -14,12 +14,9 @@
  */
 
 #include <gtest/gtest.h>
-#include <log4cplus/configurator.h>
 #include <GraphicsMagick/Magick++.h>
 
 int main(int argc, char **argv) {
-	 log4cplus::BasicConfigurator config;
-	 config.configure();
 ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }

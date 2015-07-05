@@ -13,14 +13,14 @@
 #ifndef IMAGEPHASH_HPP_
 #define IMAGEPHASH_HPP_
 
-#include <boost/multi_array.hpp>
 #include <string>
-#include <log4cplus/logger.h>
+#include <boost/multi_array.hpp>
+#include <boost/log/trivial.hpp>
+#include <boost/log/sources/severity_logger.hpp>
 #include <GraphicsMagick/Magick++.h>
 #include <GraphicsMagick/magick/image.h>
 
-using namespace log4cplus;
-using namespace std;
+using namespace std; //FIXME This is a very bad idea
 
 class ImagePHash {
 public:
@@ -38,7 +38,7 @@ private:
 	int size;
 	int smallerSize;
 	double *c; //TODO replace this with a vector
-	Logger logger;
+	boost::log::sources::severity_logger< boost::log::trivial::severity_level> logger;
 
 	void initCoefficients();
 	long convertToLong(dctMatrix, double);

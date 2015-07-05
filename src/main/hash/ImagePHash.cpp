@@ -7,12 +7,12 @@
 #include <string>
 #include <cmath>
 #include <boost/multi_array.hpp>
-#include <log4cplus/loggingmacros.h>
+#include <sstream>
 #include <iomanip>
 #include <ostream>
 #include "util/Bit.hpp"
 
-using namespace log4cplus;
+using namespace boost::log::trivial;
 using namespace std;
 using namespace Magick;
 
@@ -34,13 +34,12 @@ using namespace Magick;
 	}
 
 	void ImagePHash::init() {
-		logger = Logger::getInstance(LOG4CPLUS_TEXT("ImagePHash"));
 		InitializeMagick(NULL);
 		initCoefficients();
 	}
 
 	long ImagePHash::getLongHash(string filename) {
-		LOG4CPLUS_DEBUG(logger, "Opening image " << filename);
+		BOOST_LOG_SEV(logger, debug) << "Opening image " << filename;
 		Image img(filename);
 		Blob blob;
 		img.write(&blob);
