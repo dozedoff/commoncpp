@@ -61,10 +61,6 @@ using namespace Magick;
 		Pixels view(img);
 		const PixelPacket *pixels = view.getConst(0,0,size,size);
 
-		if(pixels == NULL) {
-			return 0L;
-		}
-
 		dctMatrix values = createMatrix();
 
 		int x, y;
