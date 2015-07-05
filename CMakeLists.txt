@@ -24,7 +24,7 @@ file(GLOB_RECURSE tests src/test/*.cpp)
 include_directories(src/include)
 include_directories(/usr/include/GraphicsMagick/)
 
-add_library(commoncpp SHARED ${source})
+add_library(commoncpp ${source})
 
 find_library(GMagick GraphicsMagick++)
 find_library(gtest gtest)
