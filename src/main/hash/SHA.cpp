@@ -60,8 +60,3 @@ std::string SHA::sha256(boost::filesystem::path filepath) {
 
 	return os.str();
 }
-
-SHA::~SHA() {
-	// TODO Auto-generated destructor stub
-}
-
