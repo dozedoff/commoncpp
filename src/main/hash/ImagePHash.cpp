@@ -29,10 +29,6 @@ ImagePHash::ImagePHash(int size, int smallerSize) {
 	init();
 }
 
-ImagePHash::~ImagePHash() {
-	delete[] c;
-}
-
 void ImagePHash::init() {
 	InitializeMagick(NULL);
 	initCoefficients();
@@ -255,7 +251,7 @@ double ImagePHash::calcDctAverage(dctMatrix dctVals) {
 // DCT function stolen from
 // http://stackoverflow.com/questions/4240490/problems-with-dct-and-idct-algorithm-in-java
 void ImagePHash::initCoefficients() {
-	c = new double[size];
+	c.reserve(size);
 
 	for (int i = 1; i < size; i++) {
 		c[i] = 1;

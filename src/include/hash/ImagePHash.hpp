@@ -30,7 +30,6 @@ public:
 
 	ImagePHash();
 	ImagePHash(int, int);
-	~ImagePHash();
 
 	long getLongHash(string);
 	long getLongHash(Magick::Blob image_data);
@@ -39,7 +38,7 @@ public:
 private:
 	int size;
 	int smallerSize;
-	double *c; //TODO replace this with a vector
+	std::vector<double> c;
 	boost::log::sources::severity_logger<boost::log::trivial::severity_level> logger;
 
 	void initCoefficients();
