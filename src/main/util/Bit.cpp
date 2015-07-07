@@ -14,11 +14,10 @@
 
 int64_t Bit::rotateLeft(const int64_t value) {
 	uint64_t unsig = value;
-	return (int64_t)Bit::rotateLeft(unsig);
+	return (int64_t) Bit::rotateLeft(unsig);
 }
 
 uint64_t Bit::rotateLeft(const uint64_t value) {
-	return (value << 1) | (value >> (sizeof(value)*8 - 1));
+	return (value << 1) | (value >> (sizeof(value) * 8 - 1));
 }
-
 

@@ -25,7 +25,7 @@ public:
 private:
 	static const int FILE_BUFFER_SIZE = 2048;
 
-	boost::log::sources::severity_logger< boost::log::trivial::severity_level> logger;
+	boost::log::sources::severity_logger<boost::log::trivial::severity_level> logger;
 };
 
 #endif /* SHA_HPP_ */

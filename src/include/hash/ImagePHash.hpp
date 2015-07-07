@@ -20,7 +20,8 @@
 #include <GraphicsMagick/Magick++.h>
 #include <GraphicsMagick/magick/image.h>
 
-using namespace std; //FIXME This is a very bad idea
+//FIXME This is a very bad idea, do not use this in header files
+using namespace std;
 
 class ImagePHash {
 public:
@@ -34,11 +35,12 @@ public:
 	long getLongHash(string);
 	long getLongHash(Magick::Blob image_data);
 	dctMatrix createMatrix(void);
+
 private:
 	int size;
 	int smallerSize;
 	double *c; //TODO replace this with a vector
-	boost::log::sources::severity_logger< boost::log::trivial::severity_level> logger;
+	boost::log::sources::severity_logger<boost::log::trivial::severity_level> logger;
 
 	void initCoefficients();
 	long convertToLong(dctMatrix, double);
@@ -46,7 +48,5 @@ private:
 	dctMatrix applyDCT(dctMatrix);
 	void init();
 };
-
-
 
 #endif /* IMAGEPHASH_HPP_ */

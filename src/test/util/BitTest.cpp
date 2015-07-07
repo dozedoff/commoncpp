@@ -76,7 +76,7 @@ TEST(BitTest, Rotate31Signed) {
 
 	result = testValue;
 
-	for(i = 0; i < 31; i++) {
+	for (i = 0; i < 31; i++) {
 		result = Bit::rotateLeft(result);
 	}
 
@@ -90,7 +90,7 @@ TEST(BitTest, Rotate32Signed) {
 
 	result = testValue;
 
-	for(i = 0; i < 32; i++) {
+	for (i = 0; i < 32; i++) {
 		result = Bit::rotateLeft(result);
 	}
 
@@ -106,7 +106,7 @@ TEST(BitTest, Rotate63Signed) {
 
 	result = testValue;
 
-	for(i = 0; i < 63; i++) {
+	for (i = 0; i < 63; i++) {
 		result = Bit::rotateLeft(result);
 	}
 
@@ -120,7 +120,7 @@ TEST(BitTest, Rotate64Signed) {
 
 	result = testValue;
 
-	for(i = 0; i < 64; i++) {
+	for (i = 0; i < 64; i++) {
 		result = Bit::rotateLeft(result);
 	}
 
@@ -145,7 +145,7 @@ TEST(BitTest, Rotate63Unsigned) {
 
 	result = testValue;
 
-	for(i = 0; i < 63; i++) {
+	for (i = 0; i < 63; i++) {
 		result = Bit::rotateLeft(result);
 	}
 	ASSERT_EQ(expected, result);
@@ -158,7 +158,7 @@ TEST(BitTest, Rotate64Unsigned) {
 
 	result = testValue;
 
-	for(i = 0; i < 64; i++) {
+	for (i = 0; i < 64; i++) {
 		result = Bit::rotateLeft(result);
 	}
 
