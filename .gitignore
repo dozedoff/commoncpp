@@ -18,3 +18,4 @@ bin
 # Eclipse project files
 .cproject
 .project
+.settings/
