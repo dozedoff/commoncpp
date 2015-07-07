@@ -20,8 +20,6 @@
 #include <GraphicsMagick/Magick++.h>
 #include <GraphicsMagick/magick/image.h>
 
-//FIXME This is a very bad idea, do not use this in header files
-using namespace std;
 
 class ImagePHash {
 public:
@@ -31,7 +29,7 @@ public:
 	ImagePHash();
 	ImagePHash(int, int);
 
-	long getLongHash(string);
+	long getLongHash(std::string);
 	long getLongHash(Magick::Blob image_data);
 	dctMatrix createMatrix(void);
 
