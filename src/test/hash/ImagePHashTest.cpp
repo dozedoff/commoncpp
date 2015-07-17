@@ -10,30 +10,30 @@
  *      Author: nicholas
  */
 
-#include <gtest/gtest.h>
+#include <catch.hpp>
 #include <iostream>
 #include "hash/ImagePHash.hpp"
 #include <GraphicsMagick/Magick++.h>
 
-TEST(ImagePHashTest, hashImage) {
+TEST_CASE("hashImage", "[ImagePHashTest]") {
 	ImagePHash iph(32, 9);
 	long pHash = iph.getLongHash("src/test/hash/testImage.jpg");
-	ASSERT_EQ(4092185452341198848, pHash);
+	REQUIRE(4092185452341198848 == pHash);
 }
 
-TEST(ImagePHashTest, hashImage_resized) {
+TEST_CASE( "hashImage_resized", "[ImagePHashTest]") {
 	ImagePHash iph(32, 9);
 	long pHash = iph.getLongHash("src/test/hash/testImage_small.jpg");
-	ASSERT_EQ(4092185452341198848, pHash);
+	REQUIRE(4092185452341198848 == pHash);
 }
 
-TEST(ImagePHashTest, hashImage_default_settings) {
+TEST_CASE( "hashImage_default_settings", "[ImagePHashTest]") {
 	ImagePHash iph;
 	long pHash = iph.getLongHash("src/test/hash/testImage.jpg");
-	ASSERT_EQ(126456442795200, pHash);
+	REQUIRE(126456442795200 == pHash);
 }
 
-TEST(ImagePHashTest, hashImage_sampling_image_too_large) {
+TEST_CASE( "hashImage_sampling_image_too_large", "[ImagePHashTest]") {
 	ImagePHash iph(32, 10);
-	ASSERT_THROW(iph.getLongHash("src/test/hash/testImage.jpg"), std::invalid_argument);
+	REQUIRE_THROWS_AS(iph.getLongHash("src/test/hash/testImage.jpg"), std::invalid_argument);
 }

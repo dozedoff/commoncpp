@@ -8,15 +8,10 @@
  *
  * @date 3 Jul 2015
  * @author Nicholas Wright
- * @brief Google test runner
+ * @brief Catch test framework setup
  * 
- * This file runs all the tests.
+ * This file sets up the catch testing framework.
  */
 
-#include <gtest/gtest.h>
-#include <GraphicsMagick/Magick++.h>
-
-int main(int argc, char **argv) {
-	::testing::InitGoogleTest(&argc, argv);
-	return RUN_ALL_TESTS();
-}
+#define CATCH_CONFIG_MAIN
+#include "catch.hpp"
