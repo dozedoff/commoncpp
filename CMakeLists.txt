@@ -54,6 +54,9 @@ else()
 	message("Skipping tests...")
 endif()
 
+# Ignore in coverage report
+set(LCOV_REMOVE_EXTRA 'include/*')
+
 # Coverage target
 SETUP_TARGET_FOR_COVERAGE(
 	cov  		# Name for custom target.
