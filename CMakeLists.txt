@@ -30,11 +30,10 @@ include_directories(catch/include)
 add_library(commoncpp ${source})
 
 find_library(GMagick GraphicsMagick++)
-find_library(gtest gtest)
 find_library(crypto crypto)
 
 # Add required boost libraries
-find_package(Boost 1.55.0 COMPONENTS log log_setup filesystem system REQUIRED)
+find_package(Boost 1.55.0 COMPONENTS log filesystem system REQUIRED)
 include_directories(${Boost_INCLUDE_DIRS})
 
 target_link_libraries(commoncpp ${GMagick} ${crypto} ${Boost_LIBRARIES})
