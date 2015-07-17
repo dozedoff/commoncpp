@@ -24,6 +24,9 @@ file(GLOB_RECURSE tests src/test/*.cpp)
 include_directories(src/include)
 include_directories(/usr/include/GraphicsMagick/)
 
+# Add catch testing framework
+include_directories(catch/include)
+
 add_library(commoncpp ${source})
 
 find_library(GMagick GraphicsMagick++)
@@ -34,15 +37,12 @@ find_library(crypto crypto)
 find_package(Boost 1.55.0 COMPONENTS log log_setup filesystem system REQUIRED)
 include_directories(${Boost_INCLUDE_DIRS})
 
-# Add GTest library
-find_package(GTest)
-
 target_link_libraries(commoncpp ${GMagick} ${crypto} ${Boost_LIBRARIES})
 
 # Only build tests if GTest is installed and option is selected
-if(GTEST_FOUND AND BUILD_TESTS)
+if(BUILD_TESTS)
 	add_executable (Test ${tests})
-	target_link_libraries(Test commoncpp ${GTEST_LIBRARIES})
+	target_link_libraries(Test commoncpp )
 
 	# copy test files to build directory
 	file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/src/test DESTINATION ${CMAKE_BINARY_DIR}/src)
@@ -50,10 +50,8 @@ if(GTEST_FOUND AND BUILD_TESTS)
 	enable_testing()
 	add_test(NAME Test COMMAND Test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 	add_custom_command(TARGET Test POST_BUILD COMMAND ctest -V)
-elseif(GTEST_FOUND)
-	message("Skipping tests...")
 else()
-	message(WARNING "GTest library not found, skipping tests.")
+	message("Skipping tests...")
 endif()
 
 # Coverage target

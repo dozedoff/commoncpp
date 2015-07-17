@@ -10,61 +10,61 @@
  *      Author: nicholas
  */
 
-#include <gtest/gtest.h>
+#include <catch.hpp>
 #include <limits>
 #include "util/Bit.hpp"
 
-TEST(BitTest, ZeroRotateSigned) {
+TEST_CASE( "ZeroRotateSigned", "[BitTest]") {
 	int64_t testValue = 0;
 
 	int64_t result = Bit::rotateLeft(testValue);
 
-	ASSERT_EQ(0, result);
+	REQUIRE(0L==result);
 }
 
-TEST(BitTest, OneRotateSigned) {
+TEST_CASE( "OneRotateSigned", "[BitTest]") {
 	int64_t testValue = 1;
 
 	int64_t result = Bit::rotateLeft(testValue);
 
-	ASSERT_EQ(2, result);
+	REQUIRE(2L==result);
 }
 
-TEST(BitTest, DoubleRotateSigned) {
+TEST_CASE( "DoubleRotateSigned", "[BitTest]") {
 	int64_t testValue = 1;
 	int64_t result;
 
 	result = Bit::rotateLeft(testValue);
 	result = Bit::rotateLeft(result);
 
-	ASSERT_EQ(4, result);
+	REQUIRE(4L==result);
 }
 
-TEST(BitTest, MinusOneRotateSigned) {
+TEST_CASE( "MinusOneRotateSigned", "[BitTest]") {
 	int64_t testValue = -1;
 
 	int64_t result = Bit::rotateLeft(testValue);
 
-	ASSERT_EQ(-1, result);
+	REQUIRE(-1L==result);
 }
 
-TEST(BitTest, MinusTwoRotateSigned) {
+TEST_CASE( "MinusTwoRotateSigned", "[BitTest]") {
 	int64_t testValue = -2;
 
 	int64_t result = Bit::rotateLeft(testValue);
 
-	ASSERT_EQ(-3, result);
+	REQUIRE(-3L==result);
 }
 
-TEST(BitTest, MaxNegativeRotateSigned) {
+TEST_CASE( "MaxNegativeRotateSigned", "[BitTest]") {
 	int64_t testValue = std::numeric_limits<int64_t>::min();
 
 	int64_t result = Bit::rotateLeft(testValue);
 
-	ASSERT_EQ(1, result);
+	REQUIRE(1L==result);
 }
 
-TEST(BitTest, Rotate31Signed) {
+TEST_CASE( "Rotate31Signed", "[BitTest]") {
 	int64_t testValue = 1;
 	int i = 0;
 
@@ -74,10 +74,10 @@ TEST(BitTest, Rotate31Signed) {
 		result = Bit::rotateLeft(result);
 	}
 
-	ASSERT_EQ(2147483648, result);
+	REQUIRE(2147483648L==result);
 }
 
-TEST(BitTest, Rotate32Signed) {
+TEST_CASE( "Rotate32Signed", "[BitTest]") {
 	int64_t testValue = 1;
 	int i = 0;
 
@@ -87,10 +87,10 @@ TEST(BitTest, Rotate32Signed) {
 		result = Bit::rotateLeft(result);
 	}
 
-	ASSERT_EQ(4294967296, result);
+	REQUIRE(4294967296L==result);
 }
 
-TEST(BitTest, Rotate63Signed) {
+TEST_CASE( "Rotate63Signed", "[BitTest]") {
 	int64_t testValue = 1;
 	int64_t expected = std::numeric_limits<int64_t>::min();
 
@@ -102,10 +102,10 @@ TEST(BitTest, Rotate63Signed) {
 		result = Bit::rotateLeft(result);
 	}
 
-	ASSERT_EQ(expected, result);
+	REQUIRE(expected==result);
 }
 
-TEST(BitTest, Rotate64Signed) {
+TEST_CASE( "Rotate64Signed", "[BitTest]") {
 	int64_t testValue = 1;
 	int i = 0;
 
@@ -115,19 +115,19 @@ TEST(BitTest, Rotate64Signed) {
 		result = Bit::rotateLeft(result);
 	}
 
-	ASSERT_EQ(1, result);
+	REQUIRE(1L==result);
 }
 
-TEST(BitTest, RotateUnsigned) {
+TEST_CASE( "RotateUnsigned", "[BitTest]") {
 	uint64_t testValue = 1;
 
 	int64_t result = testValue;
 	result = Bit::rotateLeft(result);
 
-	ASSERT_EQ(2, result);
+	REQUIRE(2L==result);
 }
 
-TEST(BitTest, Rotate63Unsigned) {
+TEST_CASE( "Rotate63Unsigned", "[BitTest]") {
 	uint64_t testValue = 1;
 	uint64_t expected = 9223372036854775808ul;
 	int i = 0;
@@ -137,10 +137,10 @@ TEST(BitTest, Rotate63Unsigned) {
 	for (i = 0; i < 63; i++) {
 		result = Bit::rotateLeft(result);
 	}
-	ASSERT_EQ(expected, result);
+	REQUIRE(expected==result);
 }
 
-TEST(BitTest, Rotate64Unsigned) {
+TEST_CASE("Rotate64Unsigned", "[BitTest]") {
 	uint64_t testValue = 1;
 	int i = 0;
 
@@ -150,5 +150,5 @@ TEST(BitTest, Rotate64Unsigned) {
 		result = Bit::rotateLeft(result);
 	}
 
-	ASSERT_EQ(1, result);
+	REQUIRE(1L==result);
 }
