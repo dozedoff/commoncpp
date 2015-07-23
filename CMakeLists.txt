@@ -40,15 +40,16 @@ target_link_libraries(commoncpp ${GMagick} ${crypto} ${Boost_LIBRARIES})
 
 # Only build tests if GTest is installed and option is selected
 if(BUILD_TESTS)
-	add_executable (Test ${tests})
-	target_link_libraries(Test commoncpp )
+	SET(TEST_BINARY test_${PROJECT_NAME})
+	add_executable (${TEST_BINARY} ${tests})
+	target_link_libraries(${TEST_BINARY} commoncpp )
 
 	# copy test files to build directory
 	file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/src/test DESTINATION ${CMAKE_BINARY_DIR}/src)
 
 	enable_testing()
-	add_test(NAME Test COMMAND Test WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-	add_custom_command(TARGET Test POST_BUILD COMMAND ctest -V)
+	add_test(NAME ${TEST_BINARY} COMMAND ${TEST_BINARY} WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+	add_custom_command(TARGET ${TEST_BINARY} POST_BUILD COMMAND ctest -V)
 else()
 	message("Skipping tests...")
 endif()
@@ -58,7 +59,7 @@ set(LCOV_REMOVE_EXTRA 'include/*')
 
 # Coverage target
 SETUP_TARGET_FOR_COVERAGE(
-	cov  		# Name for custom target.
-	Test         	# Name of the test driver executable that runs the tests.
-	coverage        # Name of output directory.
+	cov_${PROJECT_NAME} 	# Name for custom target.
+	${TEST_BINARY}         	# Name of the test driver executable that runs the tests.
+	coverage        	# Name of output directory.
 )
