@@ -12,9 +12,6 @@
 *.la
 *.a
 
-# Build directory
-bin
-
 # Eclipse project files
 .cproject
 .project
