@@ -1,0 +1,13 @@
+language: cpp
+script:
+  - mkdir build
+  - cd build
+  - cmake -DBUILD_SHARED_LIBS=ON ..
+
+compiler:
+  - clang
+  - gcc
+
+install:
+  - sudo apt-get install -qq libboost-log-dev libboost-filesystem-dev libboost-system-dev libgraphicsmagick++1-dev libssl-dev libgtest-dev
+  - cd /usr/src/gtest && sudo cmake CMakeLists.txt -Dgtest_disable_pthreads=ON && sudo make && sudo chmod o+x libgtest* && sudo mv libgtest* /usr/local/lib/
