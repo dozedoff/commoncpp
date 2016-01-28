@@ -14,7 +14,7 @@
 
 using namespace boost::log::trivial;
 using namespace std;
-using namespace Magick;
+using namespace cv;
 
 ImagePHash::ImagePHash() {
 	size = 32;
@@ -30,40 +30,39 @@ ImagePHash::ImagePHash(int size, int smallerSize) {
 }
 
 void ImagePHash::init() {
-	InitializeMagick(NULL);
 	initCoefficients();
+
+	compression_params.push_back(CV_IMWRITE_PNG_COMPRESSION);
+	compression_params.push_back(0);
 }
 
 long ImagePHash::getLongHash(string filename) {
 	BOOST_LOG_SEV(logger, debug)<< "Opening image " << filename;
-	Image img(filename);
-	Blob blob;
-	img.write(&blob);
+	Mat src = imread(filename);
 
-	return getLongHash(blob);
+	std::vector<uchar> encoded_img;
+	imencode(".png", src, encoded_img, compression_params);
+
+	return getLongHash(encoded_img);
 }
 
-long ImagePHash::getLongHash(Magick::Blob image_data) {
+long ImagePHash::getLongHash(std::vector<uchar> image_data) {
 	double avg;
 	long pHash;
 
-	Image img(image_data);
-	Geometry geo(size, size);
-	geo.aspect(true);
-	img.scale(geo);
-	img.type(GrayscaleType);
-	img.modifyImage();
+	Mat resized_image;
+	Mat source_image = imdecode(image_data,CV_LOAD_IMAGE_GRAYSCALE);
+	Size mat_size(size,size);
 
-	Pixels view(img);
-	const PixelPacket *pixels = view.getConst(0, 0, size, size);
+	resize(source_image,resized_image,mat_size);
 
 	dctMatrix values = createMatrix();
 
-	int x, y;
+	int row, col;
 
-	for (x = 0; x < size; x++) {
-		for (y = 0; y < size; y++) {
-			values[x][y] = pixels[x + y * size].blue;
+	for (row = 0; row < resized_image.rows; row++) {
+		for (col = 0; col < resized_image.cols; col++) {
+			values[row][col] = resized_image.at<uchar>(row,col);
 		}
 	}
 

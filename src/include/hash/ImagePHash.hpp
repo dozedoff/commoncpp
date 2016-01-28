@@ -17,9 +17,10 @@
 #include <boost/multi_array.hpp>
 #include <boost/log/trivial.hpp>
 #include <boost/log/sources/severity_logger.hpp>
-#include <GraphicsMagick/Magick++.h>
-#include <GraphicsMagick/magick/image.h>
 
+#include <opencv2/core.hpp>
+#include <opencv2/highgui.hpp>
+#include <opencv2/imgproc.hpp>
 
 class ImagePHash {
 public:
@@ -30,7 +31,7 @@ public:
 	ImagePHash(int, int);
 
 	long getLongHash(std::string);
-	long getLongHash(Magick::Blob image_data);
+	long getLongHash(std::vector<uchar> image_data);
 	dctMatrix createMatrix(void);
 
 private:
@@ -42,6 +43,7 @@ private:
 	void initCoefficients();
 	long convertToLong(dctMatrix, double);
 	double calcDctAverage(dctMatrix);
+	std::vector<int> compression_params;
 	dctMatrix applyDCT(dctMatrix);
 	void init();
 };

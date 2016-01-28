@@ -34,14 +34,15 @@ include_directories(catch/include)
 
 add_library(commoncpp ${source})
 
-find_library(GMagick GraphicsMagick++)
 find_library(crypto crypto)
+find_package(OpenCV REQUIRED)
+
 
 # Add required boost libraries
 find_package(Boost 1.55.0 COMPONENTS log filesystem system REQUIRED)
 include_directories(${Boost_INCLUDE_DIRS})
 
-target_link_libraries(commoncpp ${GMagick} ${crypto} ${Boost_LIBRARIES})
+target_link_libraries(commoncpp ${OpenCV_LIBRARIES} ${crypto} ${Boost_LIBRARIES})
 
 if(BUILD_TESTS)
         SET(TEST_BINARY test_${PROJECT_NAME})
