@@ -192,11 +192,9 @@ int64_t ImagePHash::convertToLong(dctMatrix dctVals, double avg) {
 
 	for (int x = 0; x < smallerSize; x++) {
 		for (int y = 0; y < smallerSize; y++) {
-			if (x != 0 && y != 0) {
 				currentValue = dctVals[x][y];
 				hash += (currentValue > avg ? 1 : 0);
 				hash = Bit::rotateLeft(hash);
-			}
 		}
 	}
 	return hash;

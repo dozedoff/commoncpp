@@ -18,19 +18,19 @@
 TEST_CASE("hashImage", "[ImagePHashTest]") {
 	ImagePHash iph(32, 9);
 	long pHash = iph.getLongHash("src/test/hash/testImage.jpg");
-	REQUIRE(pHash == 917882346248626304);
+	REQUIRE(pHash == 3413466953082467718);
 }
 
 TEST_CASE( "hashImage_resized", "[ImagePHashTest]") {
 	ImagePHash iph(32, 9);
 	long pHash = iph.getLongHash("src/test/hash/testImage_small.jpg");
-	REQUIRE(pHash == 917882896004440192);
+	REQUIRE(pHash == 3413475749175491974);
 }
 
 TEST_CASE( "hashImage_default_settings", "[ImagePHashTest]") {
 	ImagePHash iph;
 	long pHash = iph.getLongHash("src/test/hash/testImage.jpg");
-	REQUIRE(pHash == 29651685560368);
+	REQUIRE(pHash == -7276023159344816079);
 }
 
 TEST_CASE( "hashImage_sampling_image_too_large", "[ImagePHashTest]") {
