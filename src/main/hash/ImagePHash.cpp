@@ -31,27 +31,26 @@ ImagePHash::ImagePHash(int size, int smallerSize) {
 
 void ImagePHash::init() {
 	initCoefficients();
-
-	compression_params.push_back(CV_IMWRITE_PNG_COMPRESSION);
-	compression_params.push_back(0);
 }
 
 long ImagePHash::getLongHash(string filename) {
 	BOOST_LOG_SEV(logger, debug)<< "Opening image " << filename;
-	Mat src = imread(filename);
+	Mat src = imread(filename, CV_LOAD_IMAGE_GRAYSCALE);
 
-	std::vector<uchar> encoded_img;
-	imencode(".png", src, encoded_img, compression_params);
-
-	return getLongHash(encoded_img);
+	return getLongHash(src);
 }
 
-long ImagePHash::getLongHash(std::vector<uchar> image_data) {
+long ImagePHash::getLongHash(std::vector<unsigned char> image_data) {
+	Mat src = imdecode(image_data,CV_LOAD_IMAGE_GRAYSCALE);
+	return getLongHash(src);
+}
+
+long ImagePHash::getLongHash(Mat &image_data) {
 	double avg;
 	long pHash;
 
 	Mat resized_image;
-	Mat source_image = imdecode(image_data,CV_LOAD_IMAGE_GRAYSCALE);
+	Mat source_image = image_data;
 	Size mat_size(size,size);
 
 	resize(source_image,resized_image,mat_size);

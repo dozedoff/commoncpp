@@ -31,7 +31,8 @@ public:
 	ImagePHash(int, int);
 
 	long getLongHash(std::string);
-	long getLongHash(std::vector<uchar> image_data);
+	long getLongHash(cv::Mat &image_data);
+	long getLongHash(std::vector<unsigned char> image_data);
 	dctMatrix createMatrix(void);
 
 private:
@@ -43,7 +44,6 @@ private:
 	void initCoefficients();
 	long convertToLong(dctMatrix, double);
 	double calcDctAverage(dctMatrix);
-	std::vector<int> compression_params;
 	dctMatrix applyDCT(dctMatrix);
 	void init();
 };
